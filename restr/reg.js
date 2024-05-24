@@ -1,7 +1,7 @@
 import db from  '../dbConfigration/db.js'
 
 export const InsertElement = async (data) => {
-    console.log(data)
+
         try {
         const element = await db.restrictions.create({
             data:{
@@ -9,6 +9,7 @@ export const InsertElement = async (data) => {
                 name: data.name,
                 managementID:parseInt(data.managementID),
                 account:data.account,
+                accountName:data.accountName,
                 credit: data.credit,
                 debit: data.debit,
             }
@@ -62,6 +63,8 @@ export const getElementbyID = async (id) => {
                 debit: true,
                 credit: true,
                 account:true ,
+                accountName:true,
+                rest_date: true ,
                 management_rel: {
                     select: {
                         name: true

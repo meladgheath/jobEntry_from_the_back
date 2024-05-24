@@ -1,5 +1,4 @@
 import express from "express" ;
-import bodyParser from "body-parser";
 import {delete_account_id, get_account, post_account} from "./account/process.js";
 import {delete_manangement, get_management, post_management} from "./management/process.js";
 import {delete_restr, get_restr_id, get_restr_ID_id, post_restr} from "./restr/process.js";

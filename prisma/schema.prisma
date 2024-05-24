@@ -34,9 +34,10 @@ model restrictions {
   resID String
   name String
   account String
+  accountName String @default("")
   debit Decimal @default(0)
   credit Decimal @default(0)
-
+  rest_date DateTime @default(now())
   managementID Int
   management_rel management @relation(fields: [managementID] ,references: [id])
   // management management @relation(fields: [managementID], references: [id] )
