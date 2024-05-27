@@ -42,3 +42,9 @@ model restrictions {
   management_rel management @relation(fields: [managementID] ,references: [id])
   // management management @relation(fields: [managementID], references: [id] )
 }
+
+model users {
+  username String @id
+  name String
+  password String
+}
