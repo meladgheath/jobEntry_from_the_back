@@ -1,8 +1,9 @@
+
 import express from "express" ;
 import {delete_account_id, get_account, post_account} from "./account/process.js";
 import {delete_manangement, get_management, post_management} from "./management/process.js";
 import {delete_restr, get_restr_id, get_restr_ID_id, post_restr} from "./restr/process.js";
-
+import {login, post_users} from "./users/process.js";
 
 
 const app = new express();
@@ -34,11 +35,11 @@ app.get('/',(req,res)=> {
     res.end() ;
 });
 
-/*
+/*/!*
 app.get('*',(req,res)=> {
     res.sendFile('build/index.html');
 })
-*/
+*!/*/
 app.post('/account', post_account)
 app.get('/account', get_account)
 app.delete('/account/:id', delete_account_id)
@@ -51,3 +52,6 @@ app.post('/restrictions',post_restr)
 app.get('/restrictions/:id', get_restr_id)
 app.get('/restrictions/ID/:id', get_restr_ID_id)
 app.delete('/restrictions/:id',delete_restr)
+
+app.post('/users',post_users)
+app.post('/login',login)
