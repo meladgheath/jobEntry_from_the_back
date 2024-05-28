@@ -17,16 +17,27 @@ try {
     db.$disconnect()
 }
 }
+export const getAllElements = async () => {
+    try {
+        const elements = await db.users.findMany()
+        return [true , '' , elements]
+    }catch (err) {
+        console.log(err)
+        return [false, err.message]
+    } finally {
+        db.$disconnect()
+    }
+}
 
 export const check = async (data)=> {
     console.log(data)
     console.log((await checkUserName(data.username)))
 
     if (!(await checkUserName(data.username)))
-            return [false , 'the username is wrong ']
+            return [false , 'UNE']
     const [chkpass , element ] = await checkPassowrd(data.username , data.password)
         if (!(chkpass))
-            return [false , 'the password is wrong ']
+            return [false , 'PSE']
     console.log(element)
         return [true , 'correct' , element]
 }

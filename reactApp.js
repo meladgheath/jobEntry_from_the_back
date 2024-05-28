@@ -6,11 +6,10 @@ import dotenv from "dotenv";
 const app = new express();
 dotenv.config();
 
-console.log(process.env.REACT_PORT);
-const port =  process.env.PORT
+const port =  "9180"
 
 app.listen(port, function () {
-    console.log("Listing to port "+process.env.REACT_PORT);
+    console.log("Listing to port "+port);
 });
 
 const allowCrossDomain = function(req, res, next) {

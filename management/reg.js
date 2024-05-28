@@ -5,6 +5,7 @@ try {
         data:{
             name: data.name,
             code: data.code,
+            type: data.type
         }
     })
     return [true , element]
@@ -21,7 +22,11 @@ try {
     return [true, '']
 }catch (err) {
     console.log(err)
+    if (err.meta?.field_name === 'foreign key')
+        return  [false , 'FK']
+    else
     return [false , err.meta.cause]
+
 }finally {
     db.$disconnect()
 }

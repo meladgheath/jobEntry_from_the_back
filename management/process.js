@@ -2,6 +2,7 @@ import {deleteElement, getAllElements, InsertElement, updateElement} from "./reg
 
 export const post_management = async (req,res) => {
     let data = req.body
+    console.log(data)
     let [result , msg] = await InsertElement(data)
     res.send({success:result ,message:msg})
     res.end()

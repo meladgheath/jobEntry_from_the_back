@@ -3,7 +3,8 @@ import express from "express" ;
 import {delete_account_id, get_account, post_account} from "./account/process.js";
 import {delete_manangement, get_management, post_management} from "./management/process.js";
 import {delete_restr, get_restr_id, get_restr_ID_id, post_restr} from "./restr/process.js";
-import {login, post_users} from "./users/process.js";
+import {get_users, login, post_users} from "./users/process.js";
+import {post_store} from "./store/process.js";
 
 
 const app = new express();
@@ -54,4 +55,7 @@ app.get('/restrictions/ID/:id', get_restr_ID_id)
 app.delete('/restrictions/:id',delete_restr)
 
 app.post('/users',post_users)
+app.get('/users', get_users)
 app.post('/login',login)
+
+app.post('/store', post_store)

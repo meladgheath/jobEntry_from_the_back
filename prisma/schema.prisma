@@ -24,8 +24,10 @@ model management {
   id Int @id @default(autoincrement())
   code String
   name String
+  type String
   restrictions_re restrictions[]
-
+  store store[]
+  // store_transaction store_transactions[]
 }
 
 model restrictions {
@@ -40,6 +42,7 @@ model restrictions {
   rest_date DateTime @default(now())
   managementID Int
   management_rel management @relation(fields: [managementID] ,references: [id])
+
   // management management @relation(fields: [managementID], references: [id] )
 }
 
@@ -47,4 +50,21 @@ model users {
   username String @id
   name String
   password String
+}
+
+model store {
+  serailNumber String @id
+  name String
+  code String
+  managementID Int
+  imp_date DateTime
+  management_rel management @relation(fields: [managementID] , references: [id])
+}
+model store_transactions {
+  id Int @id @default(autoincrement())
+  serailNumber String
+  fromStore Int
+  toStore Int
+  // fromStore_management management @relation(fields: [fromStore, toStore] , references: [id , id ])
+  // toStore_management management @relation(fields: [toStore] , references: [id])
 }

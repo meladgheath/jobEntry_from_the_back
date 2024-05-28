@@ -135,6 +135,6 @@ export const convert = (num) => {
     return str
 }
 
-console.log(convert(1000000000000))
+console.log(convert(100522165215))
 
 // export default convert

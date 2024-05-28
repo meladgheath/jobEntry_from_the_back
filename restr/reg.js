@@ -67,7 +67,8 @@ export const getElementbyID = async (id) => {
                 rest_date: true ,
                 management_rel: {
                     select: {
-                        name: true
+                        name: true,
+                        type:true
                     }
                 }
             }
