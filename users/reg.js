@@ -69,3 +69,19 @@ export const checkPassowrd = async (username , password)=> {
         db.$disconnect()
     }
 }
+export const deleteElement = async (id) => {
+    try {
+        const element = await db.users.delete({
+            where:{username:id}
+        })
+        return [true, '']
+    }catch (err) {
+        console.log(err)
+        if (err.meta?.field_name === 'foreign key')
+            return  [false , 'FK']
+        else
+            return [false , err.meta.cause]
+    }finally {
+        db.$disconnect()
+    }
+}

@@ -31,7 +31,6 @@ model management {
 }
 
 model restrictions {
-
   id Int @id @default(autoincrement())
   resID String
   name String
@@ -42,7 +41,6 @@ model restrictions {
   rest_date DateTime @default(now())
   managementID Int
   management_rel management @relation(fields: [managementID] ,references: [id])
-
   // management management @relation(fields: [managementID], references: [id] )
 }
 
