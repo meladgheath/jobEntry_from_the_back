@@ -8,7 +8,7 @@ export const convert = (num) => {
         ["عشر","عشرين","ثلاثون","أربعون","خمسون","ستون","سبعون","ثمانون","تسعون"],
     ]
     const number_2 = [
-        ["مائة","مئتين","ثلاثمائه","أربعمائة","خمسمائه","ستمائه","سبعمائه","ثمانمائه","تسعمائه"],
+        ["مائة","مئتان","ثلاثمائه","أربعمائة","خمسمائه","ستمائه","سبعمائه","ثمانمائه","تسعمائه"],
         ["الف","الفين","ثلاث الالاف","أربع الالاف","خمس الالاف","ست الالاف","سبع الالاف","ثمان الالاف","تسع الالاف"]
     ]
 
@@ -117,24 +117,29 @@ export const convert = (num) => {
     }
     const last = words.splice(-2)
 
+    console.log(last)
+
     let indexDown = words.length
+    console.log(words)
     if (words)
         words.forEach((item, index) => {
+            console.log(number_2[indexDown -1][item - 1] +' here ')
             if (number_2[indexDown -1 ][item - 1 ] !== undefined) {
                 str = str + number_2[indexDown - 1][item - 1] + " ";
                 indexDown = indexDown - 1
             }
         })
-    if (last)
-        last.reverse().forEach((item, index) => {
+    if (last) {
+        {
+            str = str + " و "
+        }        last.reverse().forEach((item, index) => {
             if (number[index][item - 1])
-                str = str + number[index][item - 1]+  " ";
+                str = str + number[index][item - 1] + " ";
         })
-
-
+    }
     return str
 }
 
-console.log(convert(100522165215))
+console.log(convert(250))
 
 // export default convert

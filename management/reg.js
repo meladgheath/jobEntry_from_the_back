@@ -40,7 +40,7 @@ export const updateElement = async (id , data) => {
         return [true , element]
     }catch (err) {
         console.log(err.message)
-        return [false , err.meta.cause]
+        return [false , err]
     }finally {
         db.$disconnect()
     }

@@ -31,6 +31,24 @@ export const getAllElements = async () => {
         db.$disconnect()
     }
 }
+
+export const getOneElement = async (id) => {
+    try {
+        const element = await db.accountNumber.findMany({
+            where:
+                {
+                    number:id
+                }
+            }
+        )
+        return [true , element]
+    } catch (err) {
+        console.log(err)
+        return [false , err.message]
+    } finally {
+        db.$disconnect()
+    }
+}
 export const deleteElement = async (id) => {
     try {
         const element = await db.accountNumber.delete({

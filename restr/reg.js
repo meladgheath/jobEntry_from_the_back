@@ -14,6 +14,7 @@ export const InsertElement = async (data) => {
                 debit: data.debit,
             }
         })
+
         return [true , element]
     }catch (err) {
         console.log(err)
@@ -67,6 +68,7 @@ export const getElementbyID = async (id) => {
                 rest_date: true ,
                 management_rel: {
                     select: {
+                        id: true,
                         name: true,
                         type:true
                     }
@@ -89,6 +91,20 @@ export const deleteElement = async (id) => {
     }catch (err) {
         console.log(err)
         return [false , err.meta.cause]
+    }finally {
+        db.$disconnect()
+    }
+}
+
+export const updateElement = async (id , data) => {
+    try {
+        const element = await db.restrictions.update({
+            data:data,
+            where:{id: parseInt(id) }
+        })
+        return [true , element]
+    }catch (err) {
+        return [false , err]
     }finally {
         db.$disconnect()
     }

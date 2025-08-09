@@ -1,4 +1,4 @@
-import {deleteElement, getAllElements, InsertElement} from "./reg.js";
+import {deleteElement, getAllElements, getOneElement, InsertElement} from "./reg.js";
 
 
 
@@ -11,6 +11,12 @@ export const post_account = async  (req , res) => {
 export const get_account = async  (req , res) => {
     const [result , data ] = await getAllElements()
     res.send({success:result , data: data})
+    res.end()
+}
+export const getOne_account = async  (req , res) => {
+     let {id} = req.params
+    const [result , data ] = await getOneElement(id)
+    res.send({success:result , data})
     res.end()
 }
 export const delete_account_id = async (req, res) => {

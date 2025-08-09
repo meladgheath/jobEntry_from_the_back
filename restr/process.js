@@ -1,4 +1,4 @@
-import {deleteElement, getElement, getElementbyID, InsertElement} from "./reg.js";
+import {deleteElement, getElement, getElementbyID, InsertElement , updateElement} from "./reg.js";
 
 
 export const post_restr = async (req,res) => {
@@ -26,5 +26,12 @@ export const delete_restr = async (req,res) => {
     console.log(id)
     let [result , msg ] = await deleteElement(id)
     res.send({success: result , message:msg})
+    res.end()
+}
+export const update_restr = async (req,res) => {
+    let data = req.body
+    let {id} = req.params
+    let [result , msg] = await updateElement(id, data)
+    res.send ({success:result ,message:msg , data})
     res.end()
 }
