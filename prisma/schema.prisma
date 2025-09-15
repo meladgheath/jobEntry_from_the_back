@@ -11,58 +11,50 @@ generator client {
 datasource db {
   provider = "sqlite"
   // url      = env("DATABASE_URL")
-  url = "file:./dev.db"
+  url      = "file:./dev.db"
 }
 
 model accountNumber {
-  id Int @id @default(autoincrement())
+  id     Int    @id @default(autoincrement())
   number String
-  name String
+  name   String
   detail String
 }
+
 model management {
-  id Int @id @default(autoincrement())
-  code String
-  name String
-  type String
+  id              Int            @id @default(autoincrement())
+  code            String
+  name            String
+  type            String
   restrictions_re restrictions[]
-  store store[]
   // store_transaction store_transactions[]
 }
 
 model restrictions {
-  id Int @id @default(autoincrement())
-  resID String
-  name String
-  account String
-  accountName String @default("")
-  debit Decimal @default(0)
-  credit Decimal @default(0)
-  rest_date DateTime @default(now())
-  managementID Int
-  management_rel management @relation(fields: [managementID] ,references: [id])
+  id             Int        @id @default(autoincrement())
+  resID          String
+  name           String
+  account        String
+  accountName    String     @default("")
+  debit          Decimal    @default(0)
+  credit         Decimal    @default(0)
+  rest_date      DateTime   @default(now())
+  managementID   Int
+  management_rel management @relation(fields: [managementID], references: [id])
+  status         Boolean
+  tas            tas[]
   // management management @relation(fields: [managementID], references: [id] )
 }
 
 model users {
   username String @id
-  name String
+  name     String
   password String
 }
 
-model store {
-  serailNumber String @id
-  name String
-  code String
-  managementID Int
-  imp_date DateTime
-  management_rel management @relation(fields: [managementID] , references: [id])
-}
-model store_transactions {
-  id Int @id @default(autoincrement())
-  serailNumber String
-  fromStore Int
-  toStore Int
-  // fromStore_management management @relation(fields: [fromStore, toStore] , references: [id , id ])
-  // toStore_management management @relation(fields: [toStore] , references: [id])
+model tas {
+  id      Int          @id @default(autoincrement())
+  value   Decimal
+  res     Int
+  res_rel restrictions @relation(fields: [res], references: [id])
 }

@@ -3,16 +3,8 @@ import db from  '../dbConfigration/db.js'
 export const InsertElement = async (data) => {
 
         try {
-        const element = await db.restrictions.create({
-            data: data/*{
-                resID: data.id,
-                name: data.name,
-                managementID:parseInt(data.managementID),
-                account:data.account,
-                accountName:data.accountName,
-                credit: data.credit,
-                debit: data.debit,
-            }*/
+        const element = await db.tas.create({
+            data: data
         })
 
         return [true , element]
@@ -25,25 +17,9 @@ export const InsertElement = async (data) => {
 }
 export const getElement = async (id) => {
     try {
-        const element = await db.restrictions.findMany({where:{
-            resID:id},
-            select: {
-                id: true ,
-                resID: true,
-                name: true,
-                debit: true,
-                credit: true,
-
-                management_rel: {
-                    select: {
-                        name: true
-                    }
-                }
-            }
-
-
-
-        })
+        const element = await db.tas.findMany({where:{
+                res: parseInt(id)},
+            })
         return [true,element]
     }catch (err) {
         console.log(err)
@@ -52,6 +28,7 @@ export const getElement = async (id) => {
         db.$disconnect()
     }
 }
+/*
 export const getElementbyStatusAndID = async (id  ) => {
     try {
         const element = await db.restrictions.findMany({where:{
@@ -123,3 +100,4 @@ export const updateElement = async (id , data) => {
         db.$disconnect()
     }
 }
+*/

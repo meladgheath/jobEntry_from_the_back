@@ -1,26 +1,21 @@
-import {
-    deleteElement,
-    getElement,
-    getElementbyID,
-    getElementbyStatusAndID,
-    InsertElement,
-    updateElement
-} from "./reg.js";
 
+import {getElement, InsertElement} from "./reg.js";
 
-export const post_restr = async (req,res) => {
+export const post_tas = async (req, res) => {
     let data = req.body
     let [result , msg] = await InsertElement(data)
     res.send({success:result ,message:msg})
     res.end()
 }
 
-export const get_restr_id = async (req , res ) => {
+export const getByresID = async (req , res ) => {
     let {id} = req.params
     let [result , data ] = await getElement(id)
     res.send({success:result ,data})
     res.end()
 }
+/*
+
 export const get_status_in_id = async (req , res ) => {
     let {id} = req.params
     let [result, data ] = await getElementbyStatusAndID(id)
@@ -47,4 +42,4 @@ export const update_restr = async (req,res) => {
     let [result , msg] = await updateElement(id, data)
     res.send ({success:result ,message:msg , data})
     res.end()
-}
+}*/
