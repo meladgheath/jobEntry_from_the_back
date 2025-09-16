@@ -54,6 +54,7 @@ model users {
 
 model tas {
   id      Int          @id @default(autoincrement())
+  total   Decimal
   value   Decimal
   res     Int
   res_rel restrictions @relation(fields: [res], references: [id])

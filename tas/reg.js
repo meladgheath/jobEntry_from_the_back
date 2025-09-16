@@ -28,6 +28,33 @@ export const getElement = async (id) => {
         db.$disconnect()
     }
 }
+
+export const getElementWithIDAndTotal = async (id , total) => {
+    try {
+        const element = await db.tas.findMany({where:{
+                res: parseInt(id),
+                total: total
+            },
+        })
+        return [true,element]
+    }catch (err) {
+        return  [false, err.message]
+    } finally {
+        db.$disconnect()
+    }
+}
+export const deleteElement = async (id) => {
+    try {
+        const element = await db.tas.delete({where:{id:parseInt(id)}})
+        return [true, '']
+    }catch (err) {
+        console.log(err)
+        return [false , err.meta.cause]
+    }finally {
+        db.$disconnect()
+    }
+}
+
 /*
 export const getElementbyStatusAndID = async (id  ) => {
     try {
@@ -75,17 +102,6 @@ export const getElementbyID = async (id) => {
     }
 }
 
-export const deleteElement = async (id) => {
-    try {
-        const element = await db.restrictions.delete({where:{id:parseInt(id)}})
-        return [true, '']
-    }catch (err) {
-        console.log(err)
-        return [false , err.meta.cause]
-    }finally {
-        db.$disconnect()
-    }
-}
 
 export const updateElement = async (id , data) => {
     try {

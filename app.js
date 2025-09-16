@@ -15,7 +15,7 @@ import {
 } from "./restr/process.js";
 import {delete_user, get_users, login, post_users} from "./users/process.js";
 import {post_store} from "./store/process.js";
-import {getByresID, post_tas} from "./tas/process.js";
+import {deleteTas, getByresID, getTasWithTotal, post_tas} from "./tas/process.js";
 
 const app = new express();
 const __filename = fileURLToPath(import.meta.url);
@@ -59,3 +59,5 @@ app.post('/store', post_store)
 
 app.post('/tas',post_tas)
 app.get('/tas/res/:id',getByresID)
+app.get('/tas/:total/:id',getTasWithTotal)
+app.delete('/tas/:id',deleteTas)
