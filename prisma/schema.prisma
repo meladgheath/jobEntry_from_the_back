@@ -42,7 +42,7 @@ model restrictions {
   managementID   Int
   management_rel management @relation(fields: [managementID], references: [id])
   status         Boolean
-  tas            tas[]
+  // tas            tas[]
   // management management @relation(fields: [managementID], references: [id] )
 }
 
@@ -56,6 +56,6 @@ model tas {
   id      Int          @id @default(autoincrement())
   total   Decimal
   value   Decimal
-  res     Int
-  res_rel restrictions @relation(fields: [res], references: [id])
+  res     String
+  // res_rel restrictions @relation(fields: [res], references: [resID])
 }

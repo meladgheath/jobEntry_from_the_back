@@ -32,7 +32,7 @@ export const getElement = async (id) => {
 export const getElementWithIDAndTotal = async (id , total) => {
     try {
         const element = await db.tas.findMany({where:{
-                res: parseInt(id),
+                res: id,
                 total: total
             },
         })
