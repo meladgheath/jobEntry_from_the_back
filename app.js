@@ -32,7 +32,7 @@ const allowCrossDomain = function(req, res, next) {
 }
 app.use(allowCrossDomain);
 app.use(express.json());
-// app.use(express.static('build'));
+
 app.post('/account', post_account)
 app.get('/account', get_account)
 app.get('/accounts/:id',getOne_account)
