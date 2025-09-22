@@ -1,103 +1,85 @@
 
 export const convert = (num) => {
-    const word = num.toString()
+const word = num.toString()
 
 
-    const number = [
-        ["واحد","اثنين","ثلاثه","اربعه","خمسه","سته","سبعة","ثمانية","تسعة"],
-        ["عشر","عشرين","ثلاثون","أربعون","خمسون","ستون","سبعون","ثمانون","تسعون"],
-    ]
+const number = [
+    ["واحد","اثنين","ثلاثه","اربعه","خمسه","سته","سبعة","ثمانية","تسعة"],
+    ["عشر","عشرون","ثلاثون","أربعون","خمسون","ستون","سبعون","ثمانون","تسعون"],
+    ["أحد" , "اثنا"]
+]
     const number_2 = [
-        ["مائة","مئتان","ثلاثمائه","أربعمائة","خمسمائه","ستمائه","سبعمائه","ثمانمائه","تسعمائه"],
+        ["مائة","مائتين","ثلاثمائه","أربعمائة","خمسمائه","ستمائه","سبعمائه","ثمانمائه","تسعمائه"],
         ["الف","الفين","ثلاث الالاف","أربع الالاف","خمس الالاف","ست الالاف","سبع الالاف","ثمان الالاف","تسع الالاف"]
     ]
-
+    const number_3 = [
+        ["مليون","مليونان","ثلاث ملايين","أربعة ملايين","خمسة ملايين","ستة ملايين","سبعة ملايين","ثمان ملايين","تسع ملايين"]
+    ]
 
     let str = ""
     const words = Array.from(word)
-    let thousand_changer = false
-    let million_changer = false
-    let billion_changer = false
+    let twoDigitsInMilloinToggal = true
+    let milloinchanger = 0 ;
+    let andMillion = false
 
-    if (words.length >= 12) {
-        const billion_hundred = words.splice(0,1)
-        billion_hundred.forEach((item,index)=> {
+let hunderMillionschanger = false ;
+if (words.length > 8 ){
+    const hunderMillion = words.splice(0,1)
+    hunderMillion.forEach((item,index)=> {
+        if (number_2[index][item-1] !== undefined) {
             str = str + number_2[index][item - 1] + " "
-            billion_changer = true
-        })
-    }
-    if (words.length > 11) {
-    const billion_dex = words.splice(0,2)
-        billion_dex.reverse().forEach((item , index)=> {
-            if (number[index][item -1] !== undefined) {
-            str = str + number[index][item -1 ]+ " "
-            billion_changer = true
-            }
-        })
-    }
-    if (words.length > 10) {
-        const billion = words.splice(0,1)
-        billion.forEach((item , index)=> {
-            if (number[index][item -1] !== undefined) {
-            str = str + number[index][item - 1 ] + " "
-            billion_changer = true
-            }
-        })
-    }
-    if (billion_changer)
-        str = str +  " مليار "
+            hunderMillionschanger = true
+             }
+        andMillion =true
+    })
+}
+let otherword = ""
+if (words.length > 7) {
+        const tenMillion = words.splice(0, 1)
+        tenMillion.forEach((item,index )=> {
 
-    if (words.length > 9 ){
-        const million_thousand = words.splice(0, 1)
-        million_thousand.forEach((item , index)=> {
-            if (number[index][item -1 ] !== undefined) {
-            str = str + number[index][item - 1] + " "
-            thousand_changer = true
-            million_changer = true
-            }
-        })
-    }
-    if (thousand_changer){
-        str = str + " الالاف "
-        thousand_changer = !thousand_changer
-    }
+            if(number[index+1][item-1] !== undefined)
+            otherword = otherword + number[index+1][item - 1]+" "
+            else
+                twoDigitsInMilloinToggal = false
 
-    if (words.length > 8){
-        const million_hundred = words.splice(0,1)
-        million_hundred.forEach((item , index)=> {
-            if (number_2[index][item -1 ] !== undefined) {
-                str = str + number_2[index][item - 1] + " "
-                million_changer = true
-            }
-        })
-    }
-    if (words.length > 7) {
-        const million_dec = words.splice(0, 2)
-        million_dec.reverse().forEach((item , index) => {
-            if (number[index][item -1 ] !== undefined) {
-                str = str + number[index][item - 1] + " "
-                million_changer = true
-            }
-        })
-    }
+            if (index+1 === 1 && item-1 === 0)
+                twoDigitsInMilloinToggal = true
+            else
+                twoDigitsInMilloinToggal = false
 
+            console.log("the two dig " + twoDigitsInMilloinToggal)
+            milloinchanger++;
+        })
+    andMillion = true
+    }
     if (words.length > 6 ){
         const million = words.splice(0,1)
         million.forEach((item,index)=> {
-            str = str + number[index][item - 1 ]+ " "
-            million_changer = true
+            if(number[index][item-1])
+                // if (milloinchanger === 0)
+                if (twoDigitsInMilloinToggal)
+                    otherword = number[index+2][item-1 ] +" " + otherword
+            else
+            otherword =  number[index][item - 1 ]+ " " + otherword
+
         })
-    }
+        andMillion = true
+          }
+    console.log(str)
+    console.log("other word "+otherword)
+    if (otherword.length > 0 )
+    str = str +  " و " + otherword
+    if (andMillion)
+    str = str + " مليون "
 
-    if (million_changer)
-        str = str + " مليون "
-
+    let changer = 0
     if (words.length > 5) {
         const hundred_thousand = words.splice(0,1)
         hundred_thousand.forEach((item,index)=> {
             if (number_2[index][item-1] !== undefined) {
                 str = str + number_2[index][item - 1] + " "
-                thousand_changer = true
+                changer++
             }
         })
     }
@@ -109,37 +91,33 @@ export const convert = (num) => {
             thousands.reverse().forEach((item, index) => {
                 if (number_2[index][item-1] !== undefined) {
                     str = str + number[index][item - 1] + " "
-                    thousand_changer = true
+                    changer++
                 }
             })
-        if (thousand_changer)
-            str = str + " الف "
+        if (changer != 0)
+        str = str + " الف "
     }
-    const last = words.splice(-2)
-
-    console.log(last)
+        const last = words.splice(-2)
 
     let indexDown = words.length
-    console.log(words)
     if (words)
         words.forEach((item, index) => {
-            console.log(number_2[indexDown -1][item - 1] +' here ')
             if (number_2[indexDown -1 ][item - 1 ] !== undefined) {
                 str = str + number_2[indexDown - 1][item - 1] + " ";
                 indexDown = indexDown - 1
             }
         })
-    if (last) {
-        {
-            str = str + " و "
-        }        last.reverse().forEach((item, index) => {
-            if (number[index][item - 1])
+    if (last){
+        last.reverse().forEach((item, index) => {
+            if (number[index][item - 1]) {
+
+                if (str.length>0 && number[index][item - 1] !== number[1][0])
+                    str = str + " و "
+
                 str = str + number[index][item - 1] + " ";
+            }
         })
-    }
+    }   
     return str
 }
-
-console.log(convert(250))
-
 // export default convert
